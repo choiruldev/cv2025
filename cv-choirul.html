@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CV - Choirul Imam Hidayat</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+  /* ---------- Base ---------- */
+  :root{
+    --text:#111;
+    --muted:#444;
+    --line:#bfbfbf;
+    --accent:#000;
+  }
+  @page { size: A4; margin: 18mm 16mm; }
+  html,body{
+    background:#fff;
+    color:var(--text);
+    font: 13.5px/1.35 "Calibri","Helvetica Neue",Arial,Helvetica,sans-serif;
+  }
+  .page{ max-width: 820px; margin: 0 auto; padding: 28px 24px; }
+
+  .top{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    align-items:flex-start;
+    gap:16px;
+  }
+  .name{
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:.2px;
+  }
+  .subtitle{
+  font-size: 13px;
+  margin-top: 4px;
+  }
+  .location {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.header {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.header .name {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.header .title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+.header .contact-info {
+  font-size: 14px;
+  color: #333;
+}
+
+.header .contact-info a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.header .contact-info a:hover {
+  text-decoration: underline;
+}
+
+.header .social-links {
+  font-size: 14px;
+  margin-top: 4px; /* jarak antara kontak utama dan social links */
+}
+
+.header .social-links a {
+  color: #0066cc;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.header .social-links a:hover {
+  text-decoration: underline;
+}
+
+
+.contacts {
+  text-align: right;
+}
+
+.contacts div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.contacts i, .location i {
+  margin-right: 8px;
+  color: #333;
+}
+
+  /* .contacts{ text-align:right; font-size:13px; line-height:1.4; } */
+  .contacts b{ font-weight:700; }
+  .contact-info div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 14px;
+  }
+
+  .contact-info i {
+  margin-right: 8px; /* jarak ikon dan teks */
+  color: #333;       /* warna ikon, bisa disesuaikan */
+  font-size: 16px;
+  }
+
+  
+  hr.sep{ border:none; border-top:1px solid var(--line); margin:10px 0 18px; }
+
+  /* ---------- Section title with side lines ---------- */
+  .section-title{
+    position:relative;
+    text-align:center;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    margin:16px 0 10px;
+  }
+  .section-title:before,
+  .section-title:after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:34%;
+    border-top:1px solid var(--line);
+  }
+  .section-title:before{ left:0; }
+  .section-title:after{ right:0; }
+
+  /* ---------- Two-column rows (left label/right meta) ---------- */
+  .row{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:18px;
+    margin-bottom:6px;
+  }
+  .right{ text-align:right; white-space:nowrap; }
+  .inst { font-weight:700; }
+  .sub  { color:var(--muted); }
+
+  /* ---------- Bullets ---------- */
+  ul.clean{
+    list-style:none; padding:0; margin:6px 0 10px;
+  }
+  ul.clean li{
+    position:relative; padding-left:16px; margin:3px 0;
+  }
+  ul.clean li:before{
+    content:""; width:5px; height:5px; border-radius:50%;
+    background:#7a7a7a; position:absolute; left:2px; top:.58em;
+  }
+
+  /* ---------- Definition bullets (label: items) ---------- */
+  .kv{
+    display:grid; grid-template-columns: 160px 1fr; gap:10px 14px;
+    margin:6px 0 8px;
+  }
+  .kv b{ white-space:nowrap; }
+  .kv .items{ color:var(--muted); }
+
+  /* ---------- Sub-headers (projects/experience titles) ---------- */
+  .entry-title{ font-weight:700; margin-top:6px; }
+  .entry-title .company {
+    font-weight: normal;
+    font-size: 14px;
+    color: #666; /* abu-abu atau warna lain */
+    margin-top: 2px; /* jarak ke atas */
+  }
+  .link{ color:#0b62d6; text-decoration:none; }
+  .link:hover{ text-decoration:underline; }
+
+  /* Small tweaks for print */
+  @media print{
+    .page{ padding:0; }
+    a.link{ color:#0b62d6; text-decoration:none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <!-- <div class="top">
+    <div>
+      <div class="name">CHOIRUL IMAM HIDAYAT</div>
+      <div class="subtitle">Mobile Apps Android & IOS</div>
+      <div class="location"><i class="fa-solid fa-location-dot"></i> Bekasi, West Java, Indonesia</div>
+    </div>
+    <div class="contacts">
+        <div><i class="fa-solid fa-phone"></i> 085890008494</div>
+        <div><i class="fa-solid fa-envelope"></i> choirulimamh@gmail.com</div>
+        <div><i class="fa-brands fa-linkedin"></i><a class="link" href="https://linkedin.com/in/choirulimamh" target="_blank">linkedin.com/in/choirulimamh</a></div>
+        <div><i class="fa-brands fa-gitlab"></i> <a class="link" href="https://gitlab.com/choirul.dev" target="_blank">gitlab.com/choirul.dev</a></div>
+      </div>
+  </div> -->
+  <div class="header">
+    <div class="name">CHOIRUL IMAM HIDAYAT</div>
+    <div class="title">Mobile Apps Developer</div>
+    <div class="contact-info">
+      Bekasi, West Java, Indonesia | Phone: 085890008494 | 
+      Email: <a href="mailto:choirulimamh@gmail.com">choirulimamh@gmail.com</a>
+    </div>
+    <div class="contact-info">
+        <span>LinkedIn: <a href="https://linkedin.com/in/choirulimamh" target="_blank">linkedin.com/in/choirulimamh</a></span>
+        <span class="separator">|</span>
+        <span>Git: <a href="https://gitlab.com/choirul.dev" target="_blank">gitlab.com/choirul.dev</a></span>
+      </div>
+  </div>
+
+  <hr class="sep" />
+
+    <!-- SUMMARY -->
+    <h3 class="section-title">Summary</h3>
+
+
+  <div class="row">
+    <div class="clean">"A passionate Senior Mobile Developer with over 7 years of experience in building high-quality native Android (Kotlin) and iOS (Swift) applications, as well as cross-platform solutions using Flutter. Proven expertise in the full app life cycle, from concept and architecture (MVVM/Clean) to publishing and maintenance. Adept at performance optimization, third-party SDK integration (JW Player, Google Payments), and collaborating in Agile teams. Also skilled in backend development (Laravel, Node.js) and network infrastructure."<a class="link" href="#" onclick="return false;"></a></div>
+
+  </div>
+
+  <hr class="sep" />
+
+  
+
+  <!-- EDUCATION -->
+  <h3 class="section-title">Education</h3>
+
+  <div class="row">
+    <div>
+      <div class="inst">Gunadarma University</div>
+      <div class="sub">Bachelor's degree - Information Systems; GPA: 3.36</div>
+    </div>
+    <div class="right">
+      <div>Jakarta</div>
+      <div><b>Jun 2012 - Aug 2016</b></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <div class="inst">SMK Telkom Sandhy Putra Jakarta</div>
+      <div class="sub">Telecommunication Network, Optical Fiber, Transmission.</div>
+    </div>
+    <div class="right">
+      <div>Jakarta</div>
+      <div><b>Jun 2009 - Aug 2012</b></div>
+    </div>
+  </div>
+
+  <hr class="sep" />
+
+
+  <!-- SKILLS SUMMARY -->
+  <h3 class="section-title">Skills Summary</h3>
+
+  <div class="kv">
+    <b>Programming&nbsp;Languages:</b><div class="items">Kotlin, Swift, PHP, JavaScript, C#, Java, Dart, Python</div>
+    <b>Mobile&nbsp;Development:</b><div class="items">Android, iOS, Flutter, Ionic.</div>
+    <b>Web&nbsp;Development:</b><div class="items">Laravel, React, Vue.js, Node.js, CodeIgniter.</div>
+    <b>Databases:</b><div class="items">MySQL, SQLite, PostgreSQL, Firebase.</div>
+    <!-- <b>Languages:</b><div class="items">Kotlin, Swift, PHP, JavaScript, C#, SQL, JAVA, Dart, Python.</div> -->
+    <!-- <b>Frameworks:</b><div class="items">Vue.js, Angular.js , React, Laravel, Flutter.</div> -->
+    <b>Tools:</b><div class="items">Excel, PowerPoint, Figma, Postman, Windterm, Firebase Console,Trello.</div>
+    <b>Platforms:</b><div class="items">Android Studio, Xcode, Visual Studio Code, Unity.</div>
+    <b>Soft&nbsp;Skills:</b><div class="items">Rapport Building, Strong Stakeholder management, People Management, Excellent communication.</div>
+  </div>
+
+  <hr class="sep" />
+
+  <!-- WORK EXPERIENCE -->
+  <h3 class="section-title">Work Experience</h3>
+
+  <div class="row">
+    <div class="entry-title">Senior Mobile Apps Developer <a class="link" href="#" onclick="return false;"></a>
+        <div class="company">PT MNC Pictures - Jakarta, Indonesia</div>
+    </div>
+    <div class="right"><b>Mar 2020 - Present</b></div>
+  </div>
+  <ul class="clean">
+    <li> Integrated JW Player SDK to enable video streaming features, supporting over 10,000 daily active users.</li>
+    <li> Engineered a novel and comic reader module with smooth pagination and offline caching, improving user engagement time by 25%.</li>
+    <li> Live Streaming.</li>
+    <li> Integrated News API to fetch and display real-time news data in the application.</li>
+    <li> Implemented Google Play Billing Library for in-app purchases, streamlining the payment process and increasing revenue.</li>
+    <li> Implementation Built an audio player that allows users to listen to novels directly in the apps.</li>
+    <li> Applications : Klaklik.</li>
+  </ul>
+
+  <div class="row">
+    <div class="entry-title">Mobile Apps Developer<a class="link" href="#" onclick="return false;"></a>
+        <div class="company">PT Empatix - Jakarta, Indonesia</div>
+    </div>
+    <div class="right"><b>Sep 2017 - Feb 2020</b></div>
+  </div>
+  <ul class="clean">
+    <li> Implementation Hybrid Mobile Apps Android and IOS (Angular / Ionic).</li>
+    <li> Publish Project on Google Play Store & APP Store.</li>
+    <li> Built REST API and implemented database relationships in Laravel.</li>
+    <li> Built web pages in Angular JS and connected data from APIs to the UI.</li>
+    <li> Implementation Google Payment in Application.</li>
+    <li> Applications : Change 66, Project 66, Job Monitor Europe, Job Monitor Asia, TixFacility.</li>
+  </ul>
+
+  <div class="row">
+    <div class="entry-title">Android Programing<a class="link" href="#" onclick="return false;"></a>
+        <div class="company">PT Waindo Specctera - Jakarta, Indonesia</div>
+    </div>
+    <div class="right"><b>May 2017 - Aug 2017</b></div>
+  </div>
+  <ul class="clean">
+    <li> Integration with Google Maps APIs: Google Places, Google Directions, Google Street View.</li>
+  </ul>
+
+  <div class="row">
+    <div class="entry-title">Library staff<a class="link" href="#" onclick="return false;"></a>
+        <div class="company">Gunadarma University - Bekasi, Indonesia</div></div>
+    <div class="right"><b>Sep 2014 - Apr 2017</b></div>
+  </div>
+  <ul class="clean">
+    <li> Data entry into the system.</li>
+    <li> Serve borrowing and returning books.</li>
+    <li> Validation of scientific writing and thesis.</li>
+  </ul>
+
+  <hr class="sep" />
+
+
+  <!-- PROJECTS -->
+  <!-- <h3 class="section-title">Projects</h3>
+
+  <div class="row">
+    <div class="entry-title">Website Profil Company <a class="link" href="#" onclick="return false;"></a></div>
+    <div class="right"><b>December 23 - February 2024</b></div>
+  </div>
+  <ul class="clean">
+    <li>Achieved a 96% accuracy rate in forecasting student academic performance by developing and deploying a machine learning model.</li>
+    <li>Managed data integrity by handling missing values and encoding categorical variables, enhancing quality by 33%.</li>
+    <li>Conducted experiments with both classification and regression algorithms to identify the most suitable approach.</li>
+    <li>Identified and comprehended key factors influencing academic performance through thorough analysis.</li>
+  </ul>
+
+  <div class="row">
+    <div class="entry-title">Credit Card Fraud Detection | <a class="link" href="#" onclick="return false;"></a></div>
+    <div class="right"><b>September 23 - October 2023</b></div>
+  </div>
+  <ul class="clean">
+    <li>Developed and fine-tuned a logistic regression-based machine learning model achieving an 87% accuracy rate in predicting credit card fraud.</li>
+    <li>Minimized false positives by 16% through rigorous feature engineering and hyperparameter tuning processes.</li>
+    <li>Implemented under-sampling and ensemble techniques to address data imbalance, leading to 15% improved performance.</li>
+    <li>Successfully mitigated fraudulent transactions while optimizing model efficiency by 23% and accuracy by 18%.</li>
+  </ul>
+
+  <div class="row">
+    <div class="entry-title">Heart Disease Prediction | <a class="link" href="#" onclick="return false;"></a></div>
+    <div class="right"><b>July 23 - August 2023</b></div>
+  </div>
+  <ul class="clean">
+    <li>Orchestrated the development of a Logit model to predict heart disease, achieving an impressive accuracy rate of 91% and surpassing industry benchmarks.</li>
+    <li>Spearheaded the implementation of HIPAA-compliant data encryption protocols across all healthcare solutions, decreasing data breach incidents by 40% and ensuring patient privacy and security.</li>
+    <li>Demonstrated commitment to ethical data practices while contributing to the development of data-driven healthcare solutions.</li>
+    <li>Enhanced healthcare outcomes by 26% through accurate prediction of heart disease, positively impacting patient well-being.</li>
+  </ul>
+
+  <hr class="sep" /> -->
+
+  <!-- CERTIFICATES -->
+  <h3 class="section-title">Certificates</h3>
+
+  <div class="row">
+    <div class="entry-title">Prep The Hack : Memulai React JS & Dasar JSX <a class="link" href="#" onclick="return false;"></a></div>
+    <div class="right"><b>18 Apr 2023</b></div>
+  </div>
+  <ul class="clean">
+    <li> Speaker for the 4-week online course organized by Edspert.</li>
+  </ul>
+
+  <!-- <div class="row">
+    <div class="entry-title">Introduction to Data Analyst (IBM) | <a class="link" href="#" onclick="return false;">CERTIFICATE</a></div>
+    <div class="right"><b>March 2023</b></div>
+  </div>
+  <ul class="clean">
+    <li>Learned about the data ecosystem, including the ETL process and big data basics.</li>
+    <li>Mastered data gathering, identification, and cleaning for analysis preparation.</li>
+  </ul> -->
+
+  <div class="row">
+    <div class="entry-title">Seminar Mengembangkan Sistem Keamanan Jaringan Komputer Mengunakan Linux <a class="link" href="#" onclick="return false;"></a></div>
+    <div class="right"><b>15 Mar 2015</b></div>
+  </div>
+  <ul class="clean">
+    <li> Gunadarma University.</li>
+    <!-- <li>Introduced to diverse applications designed to streamline and optimize the data analysis journey, enhancing efficiency and accuracy.</li> -->
+  </ul>
+
+  <hr class="sep" />
+
+
+</div>
+</body>
+</html>
