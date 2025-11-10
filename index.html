@@ -12,7 +12,7 @@
     --text:#111;
     --muted:#444;
     --line:#bfbfbf;
-    --accent:#000;
+    --accent:#0b62d6;
   }
   @page { size: A4; margin: 18mm 16mm; }
   html,body{
@@ -44,8 +44,24 @@
 }
 
 .header {
-  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
   margin: 20px 0;
+  text-align: left;
+}
+
+.header-content {
+  flex: 1;
+}
+
+.profile-photo {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid var(--line);
+  flex-shrink: 0;
 }
 
 .header .name {
@@ -56,36 +72,49 @@
 .header .title {
   font-size: 18px;
   font-weight: 600;
-  margin: 4px 0;
+  margin: 4px 0 12px;
 }
 
-.header .contact-info {
-  font-size: 14px;
-  color: #333;
+.contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
 }
 
-.header .contact-info a {
-  color: #0066cc;
+.contact-row + .contact-row {
+  margin-top: 8px;
+}
+
+.contact-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 18px;
+  background: #f3f6fb;
+  border: 1px solid #dbe4f6;
+  color: var(--text);
+  font-size: 13px;
   text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  cursor: default;
 }
 
-.header .contact-info a:hover {
-  text-decoration: underline;
+.contact-pill i {
+  color: var(--accent);
 }
 
-.header .social-links {
-  font-size: 14px;
-  margin-top: 4px; /* jarak antara kontak utama dan social links */
+.contact-pill[href] {
+  cursor: pointer;
+  color: var(--text);
 }
 
-.header .social-links a {
-  color: #0066cc;
-  text-decoration: none;
-  margin: 0 5px;
-}
-
-.header .social-links a:hover {
-  text-decoration: underline;
+.contact-pill:hover {
+  background: #e6eefc;
+  border-color: #c2d4f7;
+  color: var(--accent);
 }
 
 
@@ -107,41 +136,39 @@
 
   /* .contacts{ text-align:right; font-size:13px; line-height:1.4; } */
   .contacts b{ font-weight:700; }
-  .contact-info div {
-  display: flex;
-  align-items: center;
-  margin-bottom: 6px;
-  font-size: 14px;
-  }
-
-  .contact-info i {
-  margin-right: 8px; /* jarak ikon dan teks */
-  color: #333;       /* warna ikon, bisa disesuaikan */
-  font-size: 16px;
-  }
-
-  
-  hr.sep{ border:none; border-top:1px solid var(--line); margin:10px 0 18px; }
-
+ 
   /* ---------- Section title with side lines ---------- */
-  .section-title{
-    position:relative;
-    text-align:center;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.7px;
-    margin:16px 0 10px;
+  .section-heading{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:28px 0 18px;
   }
-  .section-title:before,
-  .section-title:after{
+  .section-heading:first-of-type{
+    margin-top:0;
+  }
+  .section-heading::before{
     content:"";
-    position:absolute;
-    top:50%;
-    width:34%;
-    border-top:1px solid var(--line);
+    width:38px;
+    height:3px;
+    background:var(--accent);
+    border-radius:24px;
   }
-  .section-title:before{ left:0; }
-  .section-title:after{ right:0; }
+  .section-heading::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+  .section-title{
+    margin:0;
+    font-size:16px;
+    letter-spacing:.6px;
+    text-transform:uppercase;
+    font-weight:700;
+    color:var(--accent);
+    line-height:1.2;
+  }
 
   /* ---------- Two-column rows (left label/right meta) ---------- */
   .row{
@@ -166,21 +193,126 @@
     background:#7a7a7a; position:absolute; left:2px; top:.58em;
   }
 
-  /* ---------- Definition bullets (label: items) ---------- */
-  .kv{
-    display:grid; grid-template-columns: 160px 1fr; gap:10px 14px;
-    margin:6px 0 8px;
+  /* ---------- Card timeline lists ---------- */
+  .timeline{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
   }
-  .kv b{ white-space:nowrap; }
-  .kv .items{ color:var(--muted); }
+  .timeline-item{
+    position:relative;
+    margin:0;
+    padding:18px 20px 18px 38px;
+    border:1px solid #dbe4f6;
+    border-radius:14px;
+    background:#f9fbff;
+    box-shadow:0 8px 18px rgba(15, 52, 96, 0.08);
+  }
+  .timeline-item::before{
+    content:"";
+    position:absolute;
+    left:16px;
+    top:22px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 4px rgba(11, 98, 214, 0.15);
+  }
+  .timeline-item::after{
+    content:"";
+    position:absolute;
+    left:20px;
+    top:36px;
+    bottom:-26px;
+    width:2px;
+    background:linear-gradient(180deg,#d5e1f7 0%, rgba(213,225,247,0) 100%);
+  }
+  .timeline-item:last-child::after{
+    display:none;
+  }
+  .timeline-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    flex-wrap:wrap;
+  }
+  .timeline-headline{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    font-size:15px;
+    line-height:1.4;
+  }
+  .timeline-primary{
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:.2px;
+    color:var(--text);
+  }
+  .timeline-divider{ display:none; }
+  .timeline-secondary{
+    font-weight:600;
+    font-style:normal;
+    color:var(--accent);
+    letter-spacing:.2px;
+  }
+  .timeline-meta{
+    font-weight:600;
+    font-size:13px;
+    white-space:nowrap;
+    background:#fff;
+    border:1px solid #dbe4f6;
+    border-radius:999px;
+    padding:4px 14px;
+    color:#143b82;
+  }
+  .timeline-item ul{
+    margin-top:10px;
+    color:var(--muted);
+  }
+  .timeline-item p{
+    margin:10px 0 0;
+    color:var(--muted);
+  }
+  .timeline-item ul.clean li:before{
+    background:var(--accent);
+    box-shadow:0 0 0 3px rgba(11, 98, 214, 0.1);
+  }
+
+  .timeline-item.compact{
+    padding-right:24px;
+  }
+  .skills-grid{
+    display:grid;
+    gap:12px 18px;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    margin-top:12px;
+  }
+  .skill-group{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .skill-label{
+    font-weight:600;
+    color:var(--accent);
+    text-transform:uppercase;
+    font-size:12px;
+    letter-spacing:.6px;
+  }
+  .skill-items{
+    color:var(--muted);
+  }
 
   /* ---------- Sub-headers (projects/experience titles) ---------- */
   .entry-title{ font-weight:700; margin-top:6px; }
   .entry-title .company {
     font-weight: normal;
     font-size: 14px;
-    color: #666; /* abu-abu atau warna lain */
-    margin-top: 2px; /* jarak ke atas */
+    color: #666;
+    margin-top: 2px;
   }
   .link{ color:#0b62d6; text-decoration:none; }
   .link:hover{ text-decoration:underline; }
@@ -210,202 +342,274 @@
       </div>
   </div> -->
   <div class="header">
-    <div class="name">CHOIRUL IMAM HIDAYAT</div>
-    <div class="title">Mobile Apps Developer</div>
-    <div class="contact-info">
-      Bekasi, West Java, Indonesia | Phone: 085890008494 | 
-      Email: <a href="mailto:choirulimamh@gmail.com">choirulimamh@gmail.com</a>
-    </div>
-    <div class="contact-info">
-        <span>LinkedIn: <a href="https://linkedin.com/in/choirulimamh" target="_blank">linkedin.com/in/choirulimamh</a></span>
-        <span class="separator">|</span>
-        <span>Git: <a href="https://gitlab.com/choirul.dev" target="_blank">gitlab.com/choirul.dev</a></span>
+    <img src="profile.jpg" alt="Choirul Imam Hidayat" class="profile-photo" />
+    <div class="header-content">
+      <div class="name">CHOIRUL IMAM HIDAYAT</div>
+      <div class="title">Mobile Apps Developer</div>
+      <div class="contact-row">
+        <span class="contact-pill"><i class="fa-solid fa-location-dot"></i>Bekasi, West Java, Indonesia</span>
+        <a class="contact-pill" href="tel:085890008494"><i class="fa-solid fa-phone"></i>085890008494</a>
+        <a class="contact-pill" href="mailto:choirulimamh@gmail.com"><i class="fa-solid fa-envelope"></i>choirulimamh@gmail.com</a>
       </div>
+      <div class="contact-row">
+        <a class="contact-pill" href="https://linkedin.com/in/choirulimamh" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i>linkedin.com/in/choirulimamh</a>
+        <a class="contact-pill" href="https://gitlab.com/choirul.dev" target="_blank" rel="noopener"><i class="fa-brands fa-gitlab"></i>gitlab.com/choirul.dev</a>
+      </div>
+    </div>
   </div>
-
-  <hr class="sep" />
-
-    <!-- SUMMARY -->
+  <!-- SUMMARY -->
+  <div class="section-heading">
     <h3 class="section-title">Summary</h3>
-
-
-  <div class="row">
-    <div class="clean">"Passionate Senior Mobile Developer with over 8 years of experience building high-quality native Android (Kotlin), hybrid, and cross-platform (Flutter) applications, as well as cross-platform solutions using Flutter. Proven expertise in the full app life cycle, from concept and architecture (MVVM/Clean) to publishing and maintenance. Adept at performance optimization, third-party SDK integration (JW Player, Google Payments), and collaborating with Agile teams. With additional skills in backend development (Laravel, Node.js) and network infrastructure."<a class="link" href="#" onclick="return false;"></a></div>
-
   </div>
 
-  <hr class="sep" />
 
-  
-
-  <!-- EDUCATION -->
-  <h3 class="section-title">Education</h3>
-
-  <div class="row">
-    <div>
-      <div class="inst">Gunadarma University</div>
-      <div class="sub">Bachelor's degree - Information Systems; GPA: 3.36</div>
-    </div>
-    <div class="right">
-      <div>Jakarta</div>
-      <div><b>Jun 2012 - Aug 2016</b></div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">Professional Summary</span>
+        </div>
+      </div>
+      <p>I’m a mobile developer with 8+ years shipping Android native, hybrid, and Flutter apps. I enjoy owning the whole lifecycle from idea to release, tuning performance, and wiring in SDKs like JW Player and Google Payments. Working with Agile teams is second nature, and I back it up with Laravel or Node.js when backend support is needed.</p>
     </div>
   </div>
-
-  <div class="row">
-    <div>
-      <div class="inst">SMK Telkom Sandhy Putra Jakarta</div>
-      <div class="sub">Telecommunication Network, Optical Fiber, Transmission.</div>
-    </div>
-    <div class="right">
-      <div>Jakarta</div>
-      <div><b>Jun 2009 - Aug 2012</b></div>
-    </div>
-  </div>
-
-  <hr class="sep" />
-
-
-  <!-- SKILLS SUMMARY -->
-  <h3 class="section-title">Skills Summary</h3>
-
-  <div class="kv">
-    <b>Programming&nbsp;Languages:</b><div class="items">Kotlin, Swift, PHP, JavaScript, C#, Java, Dart, Python</div>
-    <b>Mobile&nbsp;Development:</b><div class="items">Android, iOS, Flutter, Ionic.</div>
-    <b>Web&nbsp;Development:</b><div class="items">Laravel, React, Vue.js, Node.js, CodeIgniter.</div>
-    <b>Databases:</b><div class="items">MySQL, SQLite, PostgreSQL, Firebase.</div>
-    <!-- <b>Languages:</b><div class="items">Kotlin, Swift, PHP, JavaScript, C#, SQL, JAVA, Dart, Python.</div> -->
-    <b>DevOps & Server:</b><div class="items">Kubernetes (K8s), Docker, NGINX, CI/CD (GitHub Actions/GitLab CI), Shell Scripting (Bash).</div>
-    <b>Tools:</b><div class="items">Excel, PowerPoint, Figma, Postman, Windterm, Firebase Console,Trello.</div>
-    <b>Platforms:</b><div class="items">Android Studio, Xcode, Visual Studio Code, Unity.</div>
-    <b>Soft&nbsp;Skills:</b><div class="items">Stakeholder Management, People Management, Communication, and Rapport Building.</div>
-  </div>
-
-  <hr class="sep" />
 
   <!-- WORK EXPERIENCE -->
-  <h3 class="section-title">Work Experience</h3>
+  <div class="section-heading">
+    <h3 class="section-title">Work Experience</h3>
+  </div>
 
-  <div class="row">
-    <div class="entry-title">Senior Mobile Apps Developer <a class="link" href="#" onclick="return false;"></a>
-        <div class="company">PT MNC Pictures - Jakarta, Indonesia</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">PT MNC PICTURES, Jakarta</span>
+          <span class="timeline-secondary">Senior Mobile Apps Developer (Supervisor)</span>
+        </div>
+        <div class="timeline-meta">Mar 2020 - Oct 2025</div>
+      </div>
+      <ul class="clean">
+        <li>Integrated JW Player SDK to enable video streaming features.</li>
+        <li>Engineered a novel and comic reader module with smooth pagination and offline caching, improving user engagement time by 25%.</li>
+        <li>Built and maintained live streaming capabilities.</li>
+        <li>Integrated News API to fetch and display real-time news data in the application.</li>
+        <li>Implemented Google Play Billing Library for in-app purchases, streamlining the payment process and increasing revenue.</li>
+        <li>Implemented an audio player that allows users to listen to novels directly in the app.</li>
+        <li>Applications: Klaklik.</li>
+      </ul>
     </div>
-    <div class="right"><b>Mar 2020 - Present</b></div>
-  </div>
-  <ul class="clean">
-    <li> Integrated JW Player SDK to enable video streaming features.</li>
-    <li> Engineered a novel and comic reader module with smooth pagination and offline caching, improving user engagement time by 25%.</li>
-    <li> Live Streaming.</li>
-    <li> Integrated News API to fetch and display real-time news data in the application.</li>
-    <li> Implemented Google Play Billing Library for in-app purchases, streamlining the payment process and increasing revenue.</li>
-    <li> Implemented an audio player that allows users to listen to novels directly in the app.</li>
-    <li> Applications : Klaklik.</li>
-  </ul>
 
-  <div class="row">
-    <div class="entry-title">Mobile Apps Developer<a class="link" href="#" onclick="return false;"></a>
-        <div class="company">PT Empatix - Jakarta, Indonesia</div>
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">PT Empatix, Jakarta</span>
+          <span class="timeline-secondary">Mobile Apps Developer</span>
+        </div>
+        <div class="timeline-meta">Sep 2017 - Feb 2020</div>
+      </div>
+      <ul class="clean">
+        <li>Developed hybrid mobile applications for Android and iOS using Angular/Ionic.</li>
+        <li>Published projects on Google Play Store and App Store.</li>
+        <li>Built REST APIs and implemented database relationships in Laravel.</li>
+        <li>Implemented Angular web pages and connected API data to the UI.</li>
+        <li>Integrated Google Payments in applications.</li>
+        <li>Applications: Change 66, Project 66, Job Monitor Europe, Job Monitor Asia, TixFacility.</li>
+      </ul>
     </div>
-    <div class="right"><b>Sep 2017 - Feb 2020</b></div>
-  </div>
-  <ul class="clean">
-    <li> Developed hybrid mobile applications for Android and iOS using Angular/Ionic.</li>
-    <li> Publish Project on Google Play Store & APP Store.</li>
-    <li> Built REST API and implemented database relationships in Laravel.</li>
-    <li> Built web pages using Angular and connected data from APIs to the UI.</li>
-    <li> Implementation Google Payment in Application.</li>
-    <li> Applications : Change 66, Project 66, Job Monitor Europe, Job Monitor Asia, TixFacility.</li>
-  </ul>
 
-  <div class="row">
-    <div class="entry-title">Android Developer<a class="link" href="#" onclick="return false;"></a>
-        <div class="company">PT Waindo Specctera - Jakarta, Indonesia</div>
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">PT Waindo Specctera, Jakarta</span>
+          <span class="timeline-secondary">Android Developer</span>
+        </div>
+        <div class="timeline-meta">May 2017 - Aug 2017</div>
+      </div>
+      <ul class="clean">
+        <li>Integrated Google Maps APIs: Places, Directions, and Street View.</li>
+      </ul>
     </div>
-    <div class="right"><b>May 2017 - Aug 2017</b></div>
+
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">Gunadarma University, Bekasi</span>
+          <span class="timeline-secondary">Library Staff</span>
+        </div>
+        <div class="timeline-meta">Sep 2014 - Apr 2017</div>
+      </div>
+      <ul class="clean">
+        <li>Validated scientific writing and handled data entry into the system.</li>
+        <li>Served borrowing and returning books.</li>
+      </ul>
+    </div>
   </div>
-  <ul class="clean">
-    <li> Integration with Google Maps APIs: Google Places, Google Directions, Google Street View.</li>
-  </ul>
-
-  <div class="row">
-    <div class="entry-title">Library staff<a class="link" href="#" onclick="return false;"></a>
-        <div class="company">Gunadarma University - Bekasi, Indonesia</div></div>
-    <div class="right"><b>Sep 2014 - Apr 2017</b></div>
+  <!-- EDUCATION -->
+  <div class="section-heading">
+    <h3 class="section-title">Education</h3>
   </div>
-  <ul class="clean">
-    <li> Validation of scientific writing and Data entry into the system.</li>
-    <li> Serve borrowing and returning books.</li>
-  </ul>
 
-  <hr class="sep" />
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">Gunadarma University</span>
+          <span class="timeline-secondary">Bachelor's degree - Information Systems; GPA: 3.36</span>
+        </div>
+        <div class="timeline-meta">Jun 2012 - Aug 2016</div>
+      </div>
+      <ul class="clean">
+        <li>Jakarta</li>
+      </ul>
+    </div>
 
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">SMK Telkom Sandhy Putra Jakarta</span>
+          <span class="timeline-secondary">Telecommunication Network, Optical Fiber, Transmission</span>
+        </div>
+        <div class="timeline-meta">Jun 2009 - Aug 2012</div>
+      </div>
+      <ul class="clean">
+        <li>Jakarta</li>
+      </ul>
+    </div>
+  </div>
+  <!-- SKILLS SUMMARY -->
+  <div class="section-heading">
+    <h3 class="section-title">Skills Summary</h3>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item compact">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">Core Capabilities</span>
+        </div>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <span class="skill-label">Programming Languages</span>
+          <span class="skill-items">Kotlin, Swift, PHP, JavaScript, C#, Java, Dart, Python</span>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">Mobile Development</span>
+          <span class="skill-items">Android, iOS, Flutter, Ionic</span>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">Web Development</span>
+          <span class="skill-items">Laravel, React, Vue.js, Node.js, CodeIgniter</span>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">Databases</span>
+          <span class="skill-items">MySQL, SQLite, PostgreSQL, Firebase</span>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">DevOps &amp; Server</span>
+          <span class="skill-items">Kubernetes (K8s), Docker, NGINX, CI/CD (GitHub Actions/GitLab CI), Bash</span>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">Tools</span>
+          <span class="skill-items">Excel, PowerPoint, Figma, Postman, Windterm, Firebase Console, Trello</span>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">Platforms</span>
+          <span class="skill-items">Android Studio, Xcode, Visual Studio Code, Unity</span>
+        </div>
+        <div class="skill-group">
+          <span class="skill-label">Soft Skills</span>
+          <span class="skill-items">Stakeholder &amp; People Management, Communication, Rapport Building</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- PROJECTS -->
-  <!-- <h3 class="section-title">Projects</h3>
-
-  <div class="row">
-    <div class="entry-title">Website Profil Company <a class="link" href="#" onclick="return false;"></a></div>
-    <div class="right"><b>December 23 - February 2024</b></div>
+  <div class="section-heading">
+    <h3 class="section-title">Projects</h3>
   </div>
-  <ul class="clean">
-    <li>Achieved a 96% accuracy rate in forecasting student academic performance by developing and deploying a machine learning model.</li>
-    <li>Managed data integrity by handling missing values and encoding categorical variables, enhancing quality by 33%.</li>
-    <li>Conducted experiments with both classification and regression algorithms to identify the most suitable approach.</li>
-    <li>Identified and comprehended key factors influencing academic performance through thorough analysis.</li>
-  </ul>
 
-  <div class="row">
-    <div class="entry-title">Credit Card Fraud Detection | <a class="link" href="#" onclick="return false;"></a></div>
-    <div class="right"><b>September 23 - October 2023</b></div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">Website Profil Company</span>
+          <span class="timeline-secondary"><a href="https://www.anavana.co.id" class="link" target="_blank" rel="noopener noreferrer">www.anavana.co.id</a> • End-to-End Delivery</span>
+        </div>
+        <div class="timeline-meta">Dec 2023 - Feb 2024</div>
+      </div>
+      <ul class="clean">
+        <li>Designed the full UI/UX theme for <a href="https://www.anavana.co.id" class="link" target="_blank" rel="noopener noreferrer">www.anavana.co.id</a> so each page mirrors the corporate profile aesthetic seen in other projects.</li>
+        <li>Refined layout, typography, and visual components to keep the presentation consistent across landing and detail pages.</li>
+        <li>Configured the server stack, hosting environment, domain records, and SSL to support a reliable, secure launch.</li>
+        <li>Developed and deployed the complete codebase, covering front-end interactions and content management workflows.</li>
+      </ul>
+    </div>
   </div>
-  <ul class="clean">
-    <li>Developed and fine-tuned a logistic regression-based machine learning model achieving an 87% accuracy rate in predicting credit card fraud.</li>
-    <li>Minimized false positives by 16% through rigorous feature engineering and hyperparameter tuning processes.</li>
-    <li>Implemented under-sampling and ensemble techniques to address data imbalance, leading to 15% improved performance.</li>
-    <li>Successfully mitigated fraudulent transactions while optimizing model efficiency by 23% and accuracy by 18%.</li>
-  </ul>
 
-  <div class="row">
-    <div class="entry-title">Heart Disease Prediction | <a class="link" href="#" onclick="return false;"></a></div>
-    <div class="right"><b>July 23 - August 2023</b></div>
-  </div>
-  <ul class="clean">
-    <li>Orchestrated the development of a Logit model to predict heart disease, achieving an impressive accuracy rate of 91% and surpassing industry benchmarks.</li>
-    <li>Spearheaded the implementation of HIPAA-compliant data encryption protocols across all healthcare solutions, decreasing data breach incidents by 40% and ensuring patient privacy and security.</li>
-    <li>Demonstrated commitment to ethical data practices while contributing to the development of data-driven healthcare solutions.</li>
-    <li>Enhanced healthcare outcomes by 26% through accurate prediction of heart disease, positively impacting patient well-being.</li>
-  </ul>
-
-  <hr class="sep" /> -->
 
   <!-- CERTIFICATES -->
-  <h3 class="section-title">Certificates</h3>
-
-  <div class="row">
-    <div class="entry-title">Prep The Hack : Memulai React JS & Dasar JSX <a class="link" href="#" onclick="return false;"></a></div>
-    <div class="right"><b>18 Apr 2023</b></div>
+  <div class="section-heading">
+    <h3 class="section-title">Certificates</h3>
   </div>
-  <ul class="clean">
-    <li> Speaker for the 4-week online course organized by Edspert.</li>
-  </ul>
 
-  <!-- <div class="row">
-    <div class="entry-title">Introduction to Data Analyst (IBM) | <a class="link" href="#" onclick="return false;">CERTIFICATE</a></div>
-    <div class="right"><b>March 2023</b></div>
-  </div>
-  <ul class="clean">
-    <li>Learned about the data ecosystem, including the ETL process and big data basics.</li>
-    <li>Mastered data gathering, identification, and cleaning for analysis preparation.</li>
-  </ul> -->
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">Prep The Hack: Memulai React JS &amp; Dasar JSX</span>
+          <span class="timeline-secondary">Speaker</span>
+        </div>
+        <div class="timeline-meta">18 Apr 2023</div>
+      </div>
+      <ul class="clean">
+        <li>4-week online course organized by Edspert.</li>
+      </ul>
+    </div>
 
-  <div class="row">
-    <div class="entry-title">Seminar Mengembangkan Sistem Keamanan Jaringan Komputer Mengunakan Linux <a class="link" href="#" onclick="return false;"></a></div>
-    <div class="right"><b>15 Mar 2015</b></div>
-  </div>
-  <ul class="clean">
-    <li> Gunadarma University.</li>
-    <!-- <li>Introduced to diverse applications designed to streamline and optimize the data analysis journey, enhancing efficiency and accuracy.</li> -->
-  </ul>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">SAP Course PLM200 - Business Process in Project Management</span>
+          <span class="timeline-secondary">Participant</span>
+        </div>
+        <div class="timeline-meta">28 Aug 2020</div>
+      </div>
+      <ul class="clean">
+        <li>Gunadarma University</li>
+      </ul>
+    </div>
+
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">SAP Course SAP01 - SAP Overview</span>
+          <span class="timeline-secondary">Participant</span>
+        </div>
+        <div class="timeline-meta">28 Aug 2020</div>
+      </div>
+      <ul class="clean">
+        <li>Gunadarma University</li>
+      </ul>
+    </div>
+
+    <!-- <div class="timeline-item">
+      <div class="timeline-header">
+        <div class="timeline-headline">
+          <span class="timeline-primary">Seminar Mengembangkan Sistem Keamanan Jaringan Komputer Menggunakan Linux</span>
+        </div>
+        <div class="timeline-meta">15 Mar 2015</div>
+      </div>
+      <ul class="clean">
+        <li>Gunadarma University</li>
+      </ul>
+    </div>
+  </div> -->
 
 <!--   <hr class="sep" /> -->
 
