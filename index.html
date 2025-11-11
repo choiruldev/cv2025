@@ -43,78 +43,88 @@
   align-items: center;
 }
 
-.header {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  margin: 20px 0;
-  text-align: left;
+.header{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  margin:18px 0 26px;
+  padding:22px;
+  border:1px solid #d6e2fb;
+  border-radius:18px;
+  background:linear-gradient(135deg,#ffffff 0%,#f8fbff 100%);
+  box-shadow:0 10px 20px rgba(12,60,130,0.07);
 }
-
-.header-content {
-  flex: 1;
+.header-content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
-
-.profile-photo {
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid var(--line);
-  flex-shrink: 0;
+.profile-photo{
+  width:130px;
+  height:130px;
+  object-fit:cover;
+  border-radius:16px;
+  border:3px solid #fff;
+  box-shadow:0 6px 16px rgba(12,60,130,0.18);
+  background:#fff;
+  flex-shrink:0;
 }
-
-.header .name {
-  font-size: 22px;
-  font-weight: bold;
+.header .name{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:.3px;
 }
-
-.header .title {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 4px 0 12px;
+.header .title{
+  font-size:17px;
+  font-weight:600;
+  color:#1d2a44;
+  margin-top:-2px;
 }
-
-.contact-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
+.contact-grid{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
 }
-
-.contact-row + .contact-row {
-  margin-top: 8px;
+.contact-column{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
 }
-
-.contact-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: 18px;
-  background: #f3f6fb;
-  border: 1px solid #dbe4f6;
-  color: var(--text);
-  font-size: 13px;
-  text-decoration: none;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-  cursor: default;
+.contact-column--wide{ min-width:220px; }
+.contact-column--auto{
+  min-width:0;
+  align-items:flex-start;
 }
-
-.contact-pill i {
-  color: var(--accent);
+.contact-column--auto .contact-pill{
+  width:auto;
+  min-width:0;
 }
-
-.contact-pill[href] {
-  cursor: pointer;
-  color: var(--text);
+.contact-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 14px;
+  border-radius:999px;
+  background:#f6f8fe;
+  border:1px solid #dce4fb;
+  color:#1f2c3f;
+  font-size:12.5px;
+  font-weight:600;
+  text-decoration:none;
+  transition:all 0.15s ease;
 }
-
-.contact-pill:hover {
-  background: #e6eefc;
-  border-color: #c2d4f7;
-  color: var(--accent);
+.contact-pill i{
+  color:#0b62d6;
+  font-size:13px;
+}
+.contact-pill[href]{
+  cursor:pointer;
+}
+.contact-pill:hover{
+  background:#e9f0ff;
+  border-color:#c7d7ff;
+  color:#0b62d6;
 }
 
 
@@ -319,8 +329,42 @@
 
   /* Small tweaks for print */
   @media print{
+    *{
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
     .page{ padding:0; }
     a.link{ color:#0b62d6; text-decoration:none; }
+    body, .page{ background:#fff !important; box-shadow:none !important; }
+    .header{
+      background:#fff !important;
+      box-shadow:none !important;
+      border-color:#bfbfbf !important;
+    }
+    .contact-pill{
+      background:#fff !important;
+      border-color:#bfbfbf !important;
+    }
+    .section-heading::before,
+    .timeline-item::before,
+    .timeline-item ul.clean li::before{
+      background:var(--accent) !important;
+    }
+    .section-heading::after{
+      background:var(--line) !important;
+    }
+    .timeline-item{
+      background:#fff !important;
+      box-shadow:none !important;
+      border-color:#bfbfbf;
+    }
+    .timeline-item::before{
+      box-shadow:none !important;
+    }
+    .contact-pill{
+      background:#fff !important;
+      border-color:#bfbfbf;
+    }
   }
 </style>
 </head>
@@ -330,7 +374,7 @@
   <!-- Header -->
   <!-- <div class="top">
     <div>
-      <div class="name">CHOIRUL IMAM HIDAYAT</div>
+      <div class="name">CHOIRUL IMAM HIDAYAT, S.Kom.</div>
       <div class="subtitle">Mobile Apps Android & IOS</div>
       <div class="location"><i class="fa-solid fa-location-dot"></i> Bekasi, West Java, Indonesia</div>
     </div>
@@ -338,22 +382,22 @@
         <div><i class="fa-solid fa-phone"></i> 085890008494</div>
         <div><i class="fa-solid fa-envelope"></i> choirulimamh@gmail.com</div>
         <div><i class="fa-brands fa-linkedin"></i><a class="link" href="https://linkedin.com/in/choirulimamh" target="_blank">linkedin.com/in/choirulimamh</a></div>
-        <div><i class="fa-brands fa-gitlab"></i> <a class="link" href="https://gitlab.com/choirul.dev" target="_blank">gitlab.com/choirul.dev</a></div>
       </div>
   </div> -->
   <div class="header">
     <img src="profile.jpg" alt="Choirul Imam Hidayat" class="profile-photo" />
     <div class="header-content">
-      <div class="name">CHOIRUL IMAM HIDAYAT</div>
+      <div class="name">CHOIRUL IMAM HIDAYAT, S.Kom.</div>
       <div class="title">Mobile Apps Developer</div>
-      <div class="contact-row">
-        <span class="contact-pill"><i class="fa-solid fa-location-dot"></i>Bekasi, West Java, Indonesia</span>
-        <a class="contact-pill" href="tel:085890008494"><i class="fa-solid fa-phone"></i>085890008494</a>
-        <a class="contact-pill" href="mailto:choirulimamh@gmail.com"><i class="fa-solid fa-envelope"></i>choirulimamh@gmail.com</a>
-      </div>
-      <div class="contact-row">
-        <a class="contact-pill" href="https://linkedin.com/in/choirulimamh" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i>linkedin.com/in/choirulimamh</a>
-        <a class="contact-pill" href="https://gitlab.com/choirul.dev" target="_blank" rel="noopener"><i class="fa-brands fa-gitlab"></i>gitlab.com/choirul.dev</a>
+      <div class="contact-grid">
+        <div class="contact-column contact-column--wide">
+          <span class="contact-pill"><i class="fa-solid fa-location-dot"></i>Bekasi, West Java, Indonesia</span>
+          <a class="contact-pill" href="https://linkedin.com/in/choirulimamh" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i>linkedin.com/in/choirulimamh</a>
+        </div>
+        <div class="contact-column contact-column--auto">
+          <a class="contact-pill" href="mailto:choirulimamh@gmail.com"><i class="fa-solid fa-envelope"></i>choirulimamh@gmail.com</a>
+          <a class="contact-pill" href="tel:085890008494"><i class="fa-solid fa-phone"></i>085890008494</a>
+        </div>
       </div>
     </div>
   </div>
@@ -370,7 +414,7 @@
           <span class="timeline-primary">Professional Summary</span>
         </div>
       </div>
-      <p>I’m a mobile developer with 8+ years shipping Android native, hybrid, and Flutter apps. I enjoy owning the whole lifecycle from idea to release, tuning performance, and wiring in SDKs like JW Player and Google Payments. Working with Agile teams is second nature, and I back it up with Laravel or Node.js when backend support is needed.</p>
+      <p>Mobile Apps Developer with 8+ years of experience in building Android and iOS applications using Kotlin, Flutter, and Ionic. Skilled in creating scalable, user-focused platforms—from UGC and live streaming apps to recruitment and analytics systems. Experienced across full-stack development with Laravel, Vue.js, and API integration. Passionate about crafting clean, efficient, and high-performance mobile experiences.</p>
     </div>
   </div>
 
@@ -389,13 +433,12 @@
         <div class="timeline-meta">Mar 2020 - Oct 2025</div>
       </div>
       <ul class="clean">
-        <li>Integrated JW Player SDK to enable video streaming features.</li>
-        <li>Engineered a novel and comic reader module with smooth pagination and offline caching, improving user engagement time by 25%.</li>
-        <li>Built and maintained live streaming capabilities.</li>
-        <li>Integrated News API to fetch and display real-time news data in the application.</li>
-        <li>Implemented Google Play Billing Library for in-app purchases, streamlining the payment process and increasing revenue.</li>
-        <li>Implemented an audio player that allows users to listen to novels directly in the app.</li>
-        <li>Applications: Klaklik.</li>
+        <li>Developed Klaklik, a UGC platform for novels, scripts, short stories, and comics.</li>
+        <li>Built casting capability so users can upload audition videos and join online casting events.</li>
+        <li>Implemented live streaming for real-time sessions with actors and artists.</li>
+        <li>Integrated Google Play Billing so readers can purchase points to unlock premium chapters.</li>
+        <li>Delivered upload modules, a news generator, and an audio player for listening to novels inside the app.</li>
+        <li>Implemented analytics via REST API and Google Analytics to monitor user behavior.</li>
       </ul>
     </div>
 
@@ -408,12 +451,10 @@
         <div class="timeline-meta">Sep 2017 - Feb 2020</div>
       </div>
       <ul class="clean">
-        <li>Developed hybrid mobile applications for Android and iOS using Angular/Ionic.</li>
-        <li>Published projects on Google Play Store and App Store.</li>
-        <li>Built REST APIs and implemented database relationships in Laravel.</li>
-        <li>Implemented Angular web pages and connected API data to the UI.</li>
-        <li>Integrated Google Payments in applications.</li>
-        <li>Applications: Change 66, Project 66, Job Monitor Europe, Job Monitor Asia, TixFacility.</li>
+        <li>Developed Android &amp; iOS apps with Ionic (Angular) for the Tix Job, Tix Facility, and Tix Analytics suite.</li>
+        <li>Built Tix Job, a recruitment and employee placement platform featuring integrated performance analysis and reporting.</li>
+        <li>Implemented backend APIs plus databases in Laravel and delivered complementary web modules using Vue.js.</li>
+        <li>Integrated Google Play Billing for Android and shipped releases to both the Play Store and App Store.</li>
       </ul>
     </div>
 
@@ -422,13 +463,14 @@
         <div class="timeline-headline">
           <span class="timeline-primary">PT Waindo Specctera, Jakarta</span>
           <span class="timeline-secondary">Android Developer</span>
-        </div>
-        <div class="timeline-meta">May 2017 - Aug 2017</div>
       </div>
-      <ul class="clean">
-        <li>Integrated Google Maps APIs: Places, Directions, and Street View.</li>
-      </ul>
+      <div class="timeline-meta">May 2017 - Aug 2017</div>
     </div>
+    <ul class="clean">
+        <li>Developed an Android mapping application for gas pipelines and gas station units.</li>
+        <li>Implemented Google APIs for Places, Directions, Street View, and search autocomplete to power real-time navigation.</li>
+    </ul>
+  </div>
 
     <div class="timeline-item">
       <div class="timeline-header">
@@ -458,22 +500,18 @@
         </div>
         <div class="timeline-meta">Jun 2012 - Aug 2016</div>
       </div>
-      <ul class="clean">
-        <li>Jakarta</li>
-      </ul>
+      <ul class="clean"></ul>
     </div>
 
     <div class="timeline-item">
       <div class="timeline-header">
         <div class="timeline-headline">
-          <span class="timeline-primary">SMK Telkom Sandhy Putra Jakarta</span>
+          <span class="timeline-primary">SMK Telkom Jakarta</span>
           <span class="timeline-secondary">Telecommunication Network, Optical Fiber, Transmission</span>
         </div>
         <div class="timeline-meta">Jun 2009 - Aug 2012</div>
       </div>
-      <ul class="clean">
-        <li>Jakarta</li>
-      </ul>
+      <ul class="clean"></ul>
     </div>
   </div>
   <!-- SKILLS SUMMARY -->
